@@ -64,6 +64,13 @@
           gitKey = "C5810093";
           name = "nabokikh";
         };
+        asier_paz = {
+          avatar = ./files/avatar/face;
+          email = "asier.paz.martinez@gmail.com";
+          fullName = "Asier Paz";
+          gitKey = "D014E87C765AE171";
+          name = "asier_paz";
+        };
       };
 
       # Function for NixOS system configuration
@@ -108,19 +115,8 @@
         };
     in
     {
-      nixosConfigurations = {
-        energy = mkNixosConfiguration "energy" "nabokikh";
-      };
-
-      darwinConfigurations = {
-        "PL-OLX-KCGXHGK3PY" = mkDarwinConfiguration "PL-OLX-KCGXHGK3PY" "alexander.nabokikh";
-      };
-
       homeConfigurations = {
-        "alexander.nabokikh@PL-OLX-KCGXHGK3PY" =
-          mkHomeConfiguration "aarch64-darwin" "alexander.nabokikh"
-            "PL-OLX-KCGXHGK3PY";
-        "nabokikh@energy" = mkHomeConfiguration "x86_64-linux" "nabokikh" "energy";
+        "asier_paz@nomad" = mkHomeConfiguration "x86_64-linux" "asier_paz" "nomad";
       };
 
       overlays = import ./overlays { inherit inputs; };
