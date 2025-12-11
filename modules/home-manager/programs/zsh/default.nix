@@ -51,7 +51,7 @@
 
       pt = "podman-tui";
 
-      repo = "cd $HOME/Documents/repositories";
+      projs = "cd $HOME/Projects";
       temp = "cd $HOME/Downloads/temp";
 
       v = "nvim";

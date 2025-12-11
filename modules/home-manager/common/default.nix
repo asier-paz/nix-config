@@ -7,10 +7,12 @@
 {
   imports = [
     ../programs/aerospace
+    ../programs/kitty
     ../programs/alacritty
     ../programs/albert
     ../programs/atuin
     ../programs/bat
+    ../programs/google-chrome
     ../programs/brave
     ../programs/btop
     ../programs/fastfetch
