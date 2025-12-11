@@ -8,7 +8,7 @@
 }:
 {
   imports = [
-    inputs.plasma-manager.homeManagerModules.plasma-manager
+    inputs.plasma-manager.homeModules.plasma-manager
     "${nhModules}/misc/wallpaper"
   ];
 
@@ -17,12 +17,14 @@
       flavour = [ "macchiato" ];
       accents = [ "lavender" ];
     })
+    yaru-theme
     kde-rounded-corners
     kdePackages.kcalc
     kdePackages.krohnkite
     kdotool
     libnotify
     tela-circle-icon-theme
+    kdePackages.konsole
   ];
 
   # Set gpg agent specific to KDE/Kwallet
@@ -67,29 +69,24 @@
         key = "Meta+Shift+Backspace";
         command = "clear-kde-notifications";
       };
-      launch-alacritty = {
-        name = "Launch Alacritty";
-        key = "Meta+Shift+Return";
-        command = "alacritty";
+      launch-kitty = {
+        name = "Launch Kitty";
+        key = "Meta+Q";
+        command = "kitty";
       };
-      launch-brave = {
-        name = "Launch Brave";
-        key = "Meta+Shift+B";
-        command = "brave";
+      launch-konsole = {
+        name = "Launch Konsole";
+        key = "Ctrl+Alt+T";
+        command = "konsole";
       };
       launch-ocr = {
         name = "Launch OCR";
         key = "Alt+@";
         command = "ocr";
       };
-      launch-telegram = {
-        name = "Launch Telegram";
-        key = "Meta+Shift+T";
-        command = "Telegram";
-      };
       launch-albert = {
         name = "Launch albert";
-        key = "Ctrl+Space";
+        key = "Meta+R";
         command = "albert toggle";
       };
       move-window-and-focus-to-desktop-1 = {
@@ -138,10 +135,10 @@
       keyboard = {
         layouts = [
           {
-            layout = "pl";
+            layout = "us";
           }
           {
-            layout = "ru";
+            layout = "es";
           }
         ];
         repeatDelay = 250;
@@ -337,8 +334,8 @@
         "Switch to Desktop 5" = "Meta+5";
         "Switch to Desktop 6" = "Meta+6";
         "Switch to Desktop 7" = "Meta+7";
-        "Window Close" = "Meta+Q";
-        "Window Fullscreen" = "Meta+M";
+        "Window Close" = "Meta+X";
+        "Window Fullscreen" = "Meta+F";
         "Window Move Center" = "Ctrl+Alt+C";
       };
 
@@ -346,7 +343,7 @@
         "show-on-mouse-pos" = "";
       };
 
-      "services/org.kde.dolphin.desktop"."_launch" = "Meta+Shift+F";
+      "services/org.kde.dolphin.desktop"."_launch" = "Meta+E";
     };
 
     spectacle = {
@@ -501,7 +498,7 @@
       gwenviewrc.ThumbnailView.AutoplayVideos = true;
       kdeglobals = {
         General = {
-          BrowserApplication = "brave-browser.desktop";
+          BrowserApplication = "google-chrome.desktop";
         };
         Icons = {
           Theme = "Tela-circle-dark";
