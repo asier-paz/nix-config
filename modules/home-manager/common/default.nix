@@ -6,32 +6,29 @@
 }:
 {
   imports = [
-    ../programs/aerospace
     ../programs/kitty
-    ../programs/alacritty
     ../programs/albert
     ../programs/atuin
     ../programs/bat
     ../programs/google-chrome
-    ../programs/brave
     ../programs/btop
     ../programs/fastfetch
     ../programs/fzf
     ../programs/git
-    ../programs/go
     ../programs/gpg
     ../programs/k9s
     ../programs/krew
     ../programs/lazygit
     ../programs/neovim
     ../programs/obs-studio
-    ../programs/saml2aws
     ../programs/starship
     ../programs/telegram
     ../programs/tmux
     ../programs/zsh
+    ../programs/vscode
     ../scripts
     ../services/flatpak
+    ../misc/xdg
   ];
 
   # Nixpkgs configuration
@@ -59,7 +56,6 @@
   home.packages =
     with pkgs;
     [
-      awscli2
       dig
       dust
       eza
@@ -67,10 +63,8 @@
       jq
       kubectl
       nh
-      openconnect
+      wireguard-tools
       pipenv
-      podman-compose
-      podman-tui
       python3
       ripgrep
       terraform
@@ -80,7 +74,6 @@
       colima
       hidden-bar
       mos
-      podman
       raycast
     ]
     ++ lib.optionals (!stdenv.isDarwin) [
