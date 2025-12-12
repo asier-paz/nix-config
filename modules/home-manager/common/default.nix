@@ -26,6 +26,9 @@
     ../programs/tmux
     ../programs/zsh
     ../programs/vscode
+    ../programs/jetbrains_webstorm
+    ../programs/jetbrains_idea
+    ../programs/jetbrains_datagrip
     ../scripts
     ../services/flatpak
     ../misc/xdg
