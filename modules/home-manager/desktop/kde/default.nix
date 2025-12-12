@@ -17,14 +17,13 @@
       flavour = [ "macchiato" ];
       accents = [ "lavender" ];
     })
-    yaru-theme
-    kde-rounded-corners
-    kdePackages.kcalc
+    #kde-rounded-corners # This only works when using along NixOS. Install manually if not
     kdePackages.krohnkite
     kdotool
     libnotify
+    # For a standalone KDE Plasma installation, we need to manually copy icons to ~/.local/share/icons
+    afterglow-cursors-recolored
     tela-circle-icon-theme
-    kdePackages.konsole
   ];
 
   # Set gpg agent specific to KDE/Kwallet
@@ -86,7 +85,7 @@
       };
       launch-albert = {
         name = "Launch albert";
-        key = "Meta+R";
+        key = "Ctrl+Space";
         command = "albert toggle";
       };
       move-window-and-focus-to-desktop-1 = {
@@ -147,31 +146,26 @@
       mice = [
         {
           accelerationProfile = "none";
-          name = "Razer Razer Viper V3 Pro";
-          productId = "00c1";
-          vendorId = "1532";
-        }
-        {
-          accelerationProfile = "none";
-          name = "Logitech USB Receiver";
-          productId = "c547";
+          name = "Logitech, Inc. G102/G203 LIGHTSYNC Gaming Mouse";
+          productId = "c092";
           vendorId = "046d";
         }
       ];
-      touchpads = [
-        {
-          disableWhileTyping = true;
-          enable = true;
-          leftHanded = false;
-          middleButtonEmulation = true;
-          name = "ELAN06A0:00 04F3:3231 Touchpad";
-          naturalScroll = true;
-          pointerSpeed = 0;
-          productId = "3231";
-          tapToClick = true;
-          vendorId = "04f3";
-        }
-      ];
+      # Disable config since this machine doesn't have a touchpad
+      # touchpads = [
+      #   {
+      #     disableWhileTyping = true;
+      #     enable = true;
+      #     leftHanded = false;
+      #     middleButtonEmulation = true;
+      #     name = "ELAN06A0:00 04F3:3231 Touchpad";
+      #     naturalScroll = true;
+      #     pointerSpeed = 0;
+      #     productId = "3231";
+      #     tapToClick = true;
+      #     vendorId = "04f3";
+      #   }
+      # ];
     };
 
     krunner.activateWhenTypingOnDesktop = false;
@@ -184,13 +178,14 @@
     };
 
     kwin = {
-      nightLight = {
-        enable = true;
-        location.latitude = "52.23";
-        location.longitude = "21.01";
-        mode = "location";
-        temperature.night = 4000;
-      };
+      # Disable nightLight
+      # nightLight = {
+      #   enable = true;
+      #   location.latitude = "52.23";
+      #   location.longitude = "21.01";
+      #   mode = "location";
+      #   temperature.night = 4000;
+      # };
 
       virtualDesktops = {
         number = 5;
@@ -334,7 +329,7 @@
         "Switch to Desktop 5" = "Meta+5";
         "Switch to Desktop 6" = "Meta+6";
         "Switch to Desktop 7" = "Meta+7";
-        "Window Close" = "Meta+X";
+        "Window Close" = "Meta+C";
         "Window Fullscreen" = "Meta+F";
         "Window Move Center" = "Ctrl+Alt+C";
       };
@@ -486,7 +481,7 @@
       enableMiddleClickPaste = false;
       clickItemTo = "select";
       colorScheme = "CatppuccinMacchiatoLavender";
-      cursor.theme = "Yaru";
+      cursor.theme = "Afterglow-Recolored-Catppuccin-Macchiato";
       splashScreen.engine = "none";
       splashScreen.theme = "none";
       tooltipDelay = 1;
