@@ -29,6 +29,7 @@
     ../programs/jetbrains_webstorm
     ../programs/jetbrains_idea
     ../programs/jetbrains_datagrip
+    ../programs/audacity
     ../scripts
     ../services/flatpak
     ../misc/xdg
