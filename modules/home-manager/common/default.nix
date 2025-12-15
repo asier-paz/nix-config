@@ -71,6 +71,8 @@
       python3
       ripgrep
       terraform
+      yt-dlp
+      ffmpeg
     ]
     ++ lib.optionals stdenv.isDarwin [
       anki-bin
