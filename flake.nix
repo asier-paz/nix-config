@@ -32,6 +32,9 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Try to fix issues with GPU usage in nix-packages on non-nixos systems
+    nixgl.url = "github:nix-community/nixGL";
   };
 
   outputs =
@@ -41,6 +44,7 @@
       darwin,
       home-manager,
       nixpkgs,
+      nixgl,
       ...
     }@inputs:
     let
@@ -104,8 +108,14 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { inherit system; };
           extraSpecialArgs = {
-            inherit inputs outputs;
+            inherit nixgl inputs outputs;
             userConfig = users.${username};
+            nixGlNvidiaConfig = {
+              # Version to pin to (should match the one in nvidia-smi)
+              driverVersion = "580.105.08";
+              # Hash obtained from `nix store prefetch-file https://us.download.nvidia.com/XFree86/Linux-x86_64/580.105.08/NVIDIA-Linux-x86_64-580.105.08.run`
+              driverHash = "sha256-2cboGIZy8+t03QTPpp3VhHn6HQFiyMKMjRdiV2MpNHU=";
+            };
             nhModules = "${self}/modules/home-manager";
           };
           modules = [
