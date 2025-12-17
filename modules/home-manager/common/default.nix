@@ -30,6 +30,7 @@
     ../programs/jetbrains_idea
     ../programs/jetbrains_datagrip
     ../programs/audacity
+    ../programs/deno
     ../scripts
     ../services/flatpak
     ../misc/xdg
