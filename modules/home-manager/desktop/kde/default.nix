@@ -78,11 +78,6 @@
         key = "Ctrl+Alt+T";
         command = "konsole";
       };
-      launch-ocr = {
-        name = "Launch OCR";
-        key = "Alt+@";
-        command = "ocr";
-      };
       launch-albert = {
         name = "Launch albert";
         key = "Ctrl+Space";
@@ -90,12 +85,12 @@
       };
       move-window-and-focus-to-desktop-1 = {
         name = "Move Window and Focus to Desktop 1";
-        key = "Meta+!";
+        key = "Meta+Shift+1";
         command = "kde_mv_window 1";
       };
       move-window-and-focus-to-desktop-2 = {
         name = "Move Window and Focus to Desktop 2";
-        key = "Meta+@";
+        key = "Meta+Shift+2";
         command = "kde_mv_window 2";
       };
       move-window-and-focus-to-desktop-3 = {
@@ -373,10 +368,10 @@
           desktops = "Desktop_1";
           desktopsrule = "3";
         };
-        description = "Assign Brave to Desktop 1";
+        description = "Assign Google Chrome to Desktop 1";
         match = {
           window-class = {
-            value = "brave-browser";
+            value = "google-chrome";
             type = "substring";
           };
           window-types = [ "normal" ];
@@ -387,94 +382,94 @@
           desktops = "Desktop_2";
           desktopsrule = "3";
         };
-        description = "Assign Alacritty to Desktop 2";
+        description = "Assign Kitty to Desktop 2";
         match = {
           window-class = {
-            value = "Alacritty";
+            value = "Kitty";
             type = "substring";
           };
           window-types = [ "normal" ];
         };
       }
-      {
-        apply = {
-          desktops = "Desktop_3";
-          desktopsrule = "3";
-        };
-        description = "Assign Telegram to Desktop 3";
-        match = {
-          window-class = {
-            value = "org.telegram.desktop";
-            type = "substring";
-          };
-          window-types = [ "normal" ];
-        };
-      }
-      {
-        apply = {
-          desktops = "Desktop_4";
-          desktopsrule = "3";
-        };
-        description = "Assign OBS to Desktop 4";
-        match = {
-          window-class = {
-            value = "com.obsproject.Studio";
-            type = "substring";
-          };
-          window-types = [ "normal" ];
-        };
-      }
-      {
-        apply = {
-          desktops = "Desktop_4";
-          desktopsrule = "3";
-          fsplevel = "4";
-          fsplevelrule = "2";
-          minimizerule = "2";
-        };
-        description = "Assign Steam to Desktop 4";
-        match = {
-          window-class = {
-            value = "steam";
-            type = "exact";
-            match-whole = false;
-          };
-          window-types = [ "normal" ];
-        };
-      }
-      {
-        apply = {
-          desktops = "Desktop_5";
-          desktopsrule = "3";
-          fsplevel = "4";
-          fsplevelrule = "2";
-        };
-        description = "Assign Steam Games to Desktop 5";
-        match = {
-          window-class = {
-            value = "steam_app_";
-            type = "substring";
-            match-whole = false;
-          };
-        };
-      }
-      {
-        apply = {
-          desktops = "Desktop_5";
-          desktopsrule = "3";
-          fsplevel = "4";
-          fsplevelrule = "2";
-          minimizerule = "2";
-        };
-        description = "Assign Zoom to Desktop 5";
-        match = {
-          window-class = {
-            value = "zoom";
-            type = "substring";
-          };
-          window-types = [ "normal" ];
-        };
-      }
+      # {
+      #   apply = {
+      #     desktops = "Desktop_3";
+      #     desktopsrule = "3";
+      #   };
+      #   description = "Assign Telegram to Desktop 3";
+      #   match = {
+      #     window-class = {
+      #       value = "org.telegram.desktop";
+      #       type = "substring";
+      #     };
+      #     window-types = [ "normal" ];
+      #   };
+      # }
+      # {
+      #   apply = {
+      #     desktops = "Desktop_4";
+      #     desktopsrule = "3";
+      #   };
+      #   description = "Assign OBS to Desktop 4";
+      #   match = {
+      #     window-class = {
+      #       value = "com.obsproject.Studio";
+      #       type = "substring";
+      #     };
+      #     window-types = [ "normal" ];
+      #   };
+      # }
+      # {
+      #   apply = {
+      #     desktops = "Desktop_4";
+      #     desktopsrule = "3";
+      #     fsplevel = "4";
+      #     fsplevelrule = "2";
+      #     minimizerule = "2";
+      #   };
+      #   description = "Assign Steam to Desktop 4";
+      #   match = {
+      #     window-class = {
+      #       value = "steam";
+      #       type = "exact";
+      #       match-whole = false;
+      #     };
+      #     window-types = [ "normal" ];
+      #   };
+      # }
+      # {
+      #   apply = {
+      #     desktops = "Desktop_5";
+      #     desktopsrule = "3";
+      #     fsplevel = "4";
+      #     fsplevelrule = "2";
+      #   };
+      #   description = "Assign Steam Games to Desktop 5";
+      #   match = {
+      #     window-class = {
+      #       value = "steam_app_";
+      #       type = "substring";
+      #       match-whole = false;
+      #     };
+      #   };
+      # }
+      # {
+      #   apply = {
+      #     desktops = "Desktop_5";
+      #     desktopsrule = "3";
+      #     fsplevel = "4";
+      #     fsplevelrule = "2";
+      #     minimizerule = "2";
+      #   };
+      #   description = "Assign Zoom to Desktop 5";
+      #   match = {
+      #     window-class = {
+      #       value = "zoom";
+      #       type = "substring";
+      #     };
+      #     window-types = [ "normal" ];
+      #   };
+      # }
     ];
 
     workspace = {
@@ -528,7 +523,7 @@
           UseNativeDecorationShadows = false;
         };
         "Script-krohnkite" = {
-          floatingClass = "brave-nngceckbapebfimnlniiiahkandclblb-Default,org.kde.kcalc,org.freedesktop.impl.portal.desktop.kde";
+          floatingClass = "google-chrome,org.kde.kcalc,org.freedesktop.impl.portal.desktop.kde";
           screenGapBetween = 6;
           screenGapBottom = 6;
           screenGapLeft = 6;
