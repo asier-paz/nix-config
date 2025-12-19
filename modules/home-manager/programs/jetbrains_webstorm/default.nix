@@ -12,7 +12,7 @@ let
     ref = "refs/heads/nixpkgs-unstable";
     rev = "c5dd43934613ae0f8ff37c59f61c507c2e8f980d";
   }) {
-    system = "x86_64-linux";
+    system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
 
