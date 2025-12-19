@@ -50,6 +50,14 @@
     let
       inherit (self) outputs;
 
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+
       # Define user configurations
       users = {
         "alexander.nabokikh" = {
@@ -102,20 +110,66 @@
           modules = [ ./hosts/${hostname} ];
         };
 
+      # NixGL helpers to wrap packages that need GPU features when using in a non-nixos system
+      nixGlNvidiaConfig = {
+        # Version to pin to (should match the one in nvidia-smi)
+        driverVersion = "580.105.08";
+        # Hash obtained from `nix store prefetch-file https://us.download.nvidia.com/XFree86/Linux-x86_64/580.105.08/NVIDIA-Linux-x86_64-580.105.08.run`
+        driverHash = "sha256-2cboGIZy8+t03QTPpp3VhHn6HQFiyMKMjRdiV2MpNHU=";
+      };
+
+      # The pinned nixGL package
+      nixGLPkg = pkgs.callPackage "${nixgl}/nixGL.nix" {
+        nvidiaVersion = nixGlNvidiaConfig.driverVersion;
+        nvidiaHash = nixGlNvidiaConfig.driverHash;
+      };
+
+      # Function to make nixGL wrapper using pinned nixGL nvidia version
+      mkNixGLWrapper = pkg: binaryName: extraArgs: pkgs.symlinkJoin {
+        name = "${pkg.name}-nixgl";
+        paths = [ pkg ];
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          rm -f $out/bin/${binaryName}
+          cat > $out/bin/${binaryName} <<EOF
+#!/bin/sh
+if [ -f "\$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+  . "\$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
+
+# Use the specific pinned nixGL binary
+exec ${nixGLPkg.nixGLNvidia}/bin/nixGLNvidia-${nixGlNvidiaConfig.driverVersion} \
+  ${pkg}/bin/${binaryName} \
+  ${pkgs.lib.concatStringsSep " " extraArgs} \
+  "\$@"
+EOF
+          chmod +x $out/bin/${binaryName}
+
+          if [ -d "${pkg}/share/applications" ]; then
+            rm -rf $out/share/applications
+            mkdir -p $out/share/applications
+            cp -r ${pkg}/share/applications/*.desktop $out/share/applications/
+            chmod +w $out/share/applications/*.desktop
+            for f in $out/share/applications/*.desktop; do
+              sed -i -E "s|^Exec=[^ ]+|Exec=$out/bin/${binaryName}|g" "$f"
+              sed -i -E "s|^Name=(.*)|Name=\1 (NixGL)|g" "$f"
+            done
+          fi
+        '';
+      };
+
       # Function for Home Manager configuration
       mkHomeConfiguration =
         system: username: hostname:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { inherit system; };
           extraSpecialArgs = {
-            inherit nixgl inputs outputs;
+            inherit
+              mkNixGLWrapper
+              inputs
+              outputs
+              ;
             userConfig = users.${username};
-            nixGlNvidiaConfig = {
-              # Version to pin to (should match the one in nvidia-smi)
-              driverVersion = "580.105.08";
-              # Hash obtained from `nix store prefetch-file https://us.download.nvidia.com/XFree86/Linux-x86_64/580.105.08/NVIDIA-Linux-x86_64-580.105.08.run`
-              driverHash = "sha256-2cboGIZy8+t03QTPpp3VhHn6HQFiyMKMjRdiV2MpNHU=";
-            };
             nhModules = "${self}/modules/home-manager";
           };
           modules = [

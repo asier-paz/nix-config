@@ -1,15 +1,8 @@
-{ pkgs, nixgl, nixGlNvidiaConfig, ... }:
+{ pkgs, mkNixGLWrapper, ... }:
 let
-  system = pkgs.stdenv.hostPlatform.system;
-
-  nixGLPkg = pkgs.callPackage "${nixgl}/nixGL.nix" {
-    nvidiaVersion = nixGlNvidiaConfig.driverVersion;
-    nvidiaHash = nixGlNvidiaConfig.driverHash;
-  };
-
-  kitty-wrapped = pkgs.writeShellScriptBin "kitty" ''
-    ${nixGLPkg.nixGLNvidia}/bin/nixGLNvidia-${nixGlNvidiaConfig.driverVersion} ${pkgs.kitty}/bin/kitty "$@"
-  '';
+  kitty-wrapped = (
+    mkNixGLWrapper pkgs.kitty "kitty" []
+  );
 in
 {
   home.packages = [
