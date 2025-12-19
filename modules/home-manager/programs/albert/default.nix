@@ -29,7 +29,34 @@
       enabled=false
 
       [path]
-      enabled=false
+      enabled=true
+
+      [calculator_qalculate]
+      enabled=true
+
+      [datetime]
+      enabled=true
+
+      [hash]
+      enabled=true
+
+      [obsidian]
+      enabled=true
+
+      [ssh]
+      enabled=true
+
+      [timezones]
+      enabled=true
+
+      [timer]
+      enabled=true
+
+      [urlhandler]
+      enabled=true
+
+      [vpn]
+      enabled=true
 
       [system]
       command_lock=loginctl lock-session
