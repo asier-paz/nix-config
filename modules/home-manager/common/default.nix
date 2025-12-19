@@ -75,6 +75,7 @@
       terraform
       yt-dlp
       ffmpeg
+      nixfmt
     ]
     ++ lib.optionals stdenv.isDarwin [
       anki-bin
